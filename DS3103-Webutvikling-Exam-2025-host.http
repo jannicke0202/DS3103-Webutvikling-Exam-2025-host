@@ -1,0 +1,6 @@
+@DS3103_Webutvikling_Exam_2025_host_HostAddress = http://localhost:5108
+
+GET {{DS3103_Webutvikling_Exam_2025_host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
