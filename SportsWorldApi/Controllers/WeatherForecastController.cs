@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace DS3103_Webutvikling_Exam_2025_host.Controllers;
+namespace SportsWorldApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

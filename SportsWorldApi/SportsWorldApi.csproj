@@ -4,7 +4,6 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>DS3103_Webutvikling_Exam_2025_host</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

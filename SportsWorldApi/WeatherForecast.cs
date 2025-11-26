@@ -1,4 +1,4 @@
-namespace DS3103_Webutvikling_Exam_2025_host;
+namespace SportsWorldApi;
 
 public class WeatherForecast
 {
