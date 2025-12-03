@@ -11,7 +11,7 @@ const AppRouting = () => {
         
         <Routes>
             <Route path="/" element={<HomePage/>}/>
-            <Route path="administation-panel" element={<AdminPage/>}/>
+            <Route path="/administration-page" element={<AdminPage/>}/>
             
         </Routes>
 
