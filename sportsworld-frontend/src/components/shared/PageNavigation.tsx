@@ -5,17 +5,11 @@ const PageNavigation = () => {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="flex justify-center gap-10">
-        <Link
-          to="/"
-          className="text-white text-xl font-medium hover:text-cyan-400"
-        >
+        <Link to="/" className="text-white text-xl font-medium hover:text-cyan-400">
           Home
         </Link>
 
-        <Link
-          to="/administration-panel"
-          className="text-white text-xl font-medium hover:text-cyan-400"
-        >
+        <Link to="/administration-page" className="text-white text-xl font-medium hover:text-cyan-400">
           Admin Panel
         </Link>
       </div>
