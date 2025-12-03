@@ -9,9 +9,23 @@ const PageNavigation = () => {
           Home
         </Link>
 
+        <Link to="/register" className="text-white text-xl font-medium hover:text-cyan-400">
+        Register a new player
+        </Link>
+
         <Link to="/administration-page" className="text-white text-xl font-medium hover:text-cyan-400">
           Admin Panel
         </Link>
+
+        <Link to="/page4" className="text-white text-xl font-medium hover:text-cyan-400">
+          Page 4
+        </Link>
+
+        <Link to="/page5" className="text-white text-xl font-medium hover:text-cyan-400">
+          Page 5
+        </Link>
+
+
       </div>
     </nav>
   );
