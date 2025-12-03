@@ -9,6 +9,6 @@ public class SportsWorldContext(DbContextOptions<SportsWorldContext> options) : 
 
     //legg til de andre db settene under her
     //TODO: Athletes og Venue db set
-    public DbSet<Models.Finance> Finances { get; set; }
+    public DbSet<Finance> Finances { get; set; }
 
 }
