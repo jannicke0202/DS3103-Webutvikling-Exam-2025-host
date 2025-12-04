@@ -15,6 +15,8 @@ export const AthleteProvider = ({children} : Props) => {
         {id: 100, name: "Context test athlete 2"}
     ]);
 
+
+    
     useEffect( () => {
         setAthletesFromService();
     }, [] );
