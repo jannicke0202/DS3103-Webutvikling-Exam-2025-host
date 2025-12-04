@@ -1,9 +1,15 @@
-namespace SportsWorldApi.Models
-{
-    public interface IAthlete
+using System.ComponentModel.DataAnnotations;
+using SportsWorldApi.Interfaces;
+
+namespace SportsWorldApi.Models;
+
+    public class Athlete : IAthlete
     {
-        string Name { get; set; }
-        int Age { get; set; }
-        string Sport { get; set; }
+    [Key]
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Gender { get; set; } = string.Empty;
+    public int Price { get; set; }
+    public string Image { get; set; } = string.Empty;
     }
-}
+    
