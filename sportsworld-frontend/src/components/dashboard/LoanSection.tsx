@@ -15,7 +15,7 @@ const LoanSection = () => {
   return (
     <div className="max-w-2xl mx-auto">
       <label htmlFor="loan" className="block text-xl font-bold text-gray-800 mb-4">
-        Get More Money - Take a Loan
+        Get more cash from the bank
       </label>
       <div className="flex gap-4">
         <input
@@ -23,7 +23,7 @@ const LoanSection = () => {
           type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          placeholder="200.000"
+          placeholder="200.000 NOK"
           className="flex-1 px-6 py-4 text-xl border-2 border-gray-300 rounded-xl focus:border-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-200 transition"
         />
         <button

@@ -35,7 +35,7 @@ const AvailableAthletes = () => {
                 <p className="text-sm text-gray-500">Transfer fee</p>
               </div>
               <button
-                onClick={() => purchaseAthlete(athlete.id)}
+                onClick={() => purchaseAthlete(athlete.id!)}
                 className="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold rounded-xl hover:from-amber-600 hover:to-orange-700 transform hover:scale-110 transition shadow-md"
               >Purchase</button>
             </div>
