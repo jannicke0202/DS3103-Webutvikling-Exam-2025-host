@@ -1,21 +1,27 @@
-import { useState, createContext, type ReactNode, Children, useEffect } from "react";
+import { useState, createContext, type ReactNode, Children, useEffect, useContext } from "react";
 import { type IAthlete } from "../interfaces/IAthlete";
-import { type IAthleteContext } from "../interfaces/IAthleteContext";
+import { type ISportsWorldContext } from "../interfaces/ISportsWorldContext";
 import AthleteService from "../services/AthleteService";
 import { type IDefaultResponse } from "../interfaces/ResponseInterfaces";
+import { type IVenue } from "../interfaces/IVenue";
+import { type IFinance } from "../interfaces/IFinance";
 
-export const AthleteContext = createContext<IAthleteContext | null>(null);
+
+
+
+
+// Context
+export const SportsWorldContext = createContext<ISportsWorldContext | null>(null);
+
 
 interface Props {children: ReactNode}
 
-export const AthleteProvider = ({children} : Props) => {
+export const SportsWorldProvider = ({children} : Props) => {
 
     const [athletes, setAthletes] = useState<IAthlete[]>([
         {id: 99, name: "Context test athlete 1"},
         {id: 100, name: "Context test athlete 2"}
     ]);
-
-
     
     useEffect( () => {
         setAthletesFromService();
@@ -49,11 +55,20 @@ export const AthleteProvider = ({children} : Props) => {
     }
 
     return (
-        <AthleteContext.Provider value={{
+        <SportsWorldContext.Provider value={{
             athletes,
             getAthleteQuantity,
-            saveAthlete
-        }}>{children}</AthleteContext.Provider>
+            saveAthlete,
+            
+        } as ISportsWorldContext}>{children}</SportsWorldContext.Provider>
     )
 
 }
+
+export const useSportsWorld = () => {
+    const context = useContext(SportsWorldContext);
+    if (!context) {
+      throw new Error("useSportsWorld must be used within a SportsWorldProvider");
+    }
+    return context;
+  };

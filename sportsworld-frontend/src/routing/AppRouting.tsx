@@ -5,6 +5,7 @@ import PageNavigation from "../components/shared/PageNavigation";
 import RegisterPage from "../pages/RegisterPage";
 import Page4 from "../pages/Page4";
 import Page5 from "../pages/Page5";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRouting = () => {
     return (
@@ -18,6 +19,7 @@ const AppRouting = () => {
             <Route path="/administration-page" element={<AdminPage/>}/>
             <Route path="/page4" element={<Page4/>}/>
             <Route path="/page5" element={<Page5/>}/>
+            <Route path="/*" element={<NotFoundPage/>}/>
         </Routes>
 
         <PageFooter/>
