@@ -2,6 +2,7 @@ import { type IAthlete } from "./IAthlete";
 
 export interface IDefaultResponse{
     success: boolean
+    message: string
 }
 
 export interface IAthletesResponse {
@@ -12,4 +13,5 @@ export interface IAthletesResponse {
 export interface IAthleteResponse {
     success: boolean,
     data: IAthlete | null
+    message: string
 }
