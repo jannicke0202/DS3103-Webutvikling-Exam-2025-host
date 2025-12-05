@@ -19,13 +19,18 @@ interface Props {children: ReactNode}
 export const SportsWorldProvider = ({children} : Props) => {
 
     const [athletes, setAthletes] = useState<IAthlete[]>([
-        {id: 99, name: "Context test athlete 1"},
-        {id: 100, name: "Context test athlete 2"}
+        {id: 99, name: "Context test athlete 1", purchaseStatus: false, price: 100000},
+        {id: 100, name: "Context test athlete 2", purchaseStatus: false, price: 200000}
     ]);
+
+    const [venues, setVenues] = useState<IVenue[]>([
+        {id: 1, venueName: "Context test venue 1", venueCapacity: 52000},
+        {id: 2, venueName: "Context test venue 2", venueCapacity: 30400}
+    ]);
+
+    const [finance, setFinance]     = useState<IFinance | null>(null); 
     
-    useEffect( () => {
-        setAthletesFromService();
-    }, [] );
+    useEffect(() => {}, []);
 
     const setAthletesFromService = async () => {
         const response = await AthleteService.getAllAthletes();
@@ -54,12 +59,39 @@ export const SportsWorldProvider = ({children} : Props) => {
         return response;
     }
 
+    const deleteAthlete = async (id: number): Promise<IDefaultResponse> => {
+        console.log("deleteAthlete not ready yet", id);
+        return { success: false, message: "Not implemented" };
+      };
+    
+      const purchaseAthlete = async (id: number): Promise<IDefaultResponse> => {
+        console.log("purchaseAthlete not ready yet", id);
+        return { success: false, message: "Not implemented" };
+      };
+    
+      const takeLoan = async (amount: number): Promise<IDefaultResponse> => {
+        console.log("takeLoan not ready yet", amount);
+        return { success: false, message: "Not implemented" };
+      };
+    
+      const saveVenue = async (data: Omit<IVenue, "id">): Promise<IDefaultResponse> => {
+        console.log("saveVenue not ready yet", data);
+        return { success: false, message: "Not implemented" };
+      };
+
     return (
         <SportsWorldContext.Provider value={{
             athletes,
-            getAthleteQuantity,
-            saveAthlete,
+            venues,
+            finance,
             
+            saveAthlete,
+            deleteAthlete,
+            purchaseAthlete,
+            takeLoan,
+            saveVenue,
+
+            getAthleteQuantity,
         } as ISportsWorldContext}>{children}</SportsWorldContext.Provider>
     )
 

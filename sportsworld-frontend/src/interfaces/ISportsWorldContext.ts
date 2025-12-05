@@ -7,11 +7,20 @@ export interface ISportsWorldContext{
 
     // data
     athletes: IAthlete[],
-    finance: IFinance[],
+    finance: IFinance | null,
     venues: IVenue[],
 
     // athlete functions
-    getAthleteQuantity: () => number,
     saveAthlete: (newAthlete: IAthlete) => Promise<IDefaultResponse>,
+    purchaseAthlete: (id: number) => Promise<IDefaultResponse>;
+
+    // finance
+    takeLoan: (amount: number) => Promise<IDefaultResponse>;
+
+    // venue
+    saveVenue: (data: Omit<IVenue, "id">) => Promise<IDefaultResponse>;
+
+    // helper
+    getAthleteQuantity: () => number
 
 }
