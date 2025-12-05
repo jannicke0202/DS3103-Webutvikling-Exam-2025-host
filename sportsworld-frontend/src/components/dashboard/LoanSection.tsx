@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSportsWorld } from "../../context/SportsWorldContext";
 
 const LoanSection = () => {
   const [amount, setAmount] = useState("");
