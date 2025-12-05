@@ -1,5 +1,6 @@
 export interface IVenue {
     id?: number;
     venueName: string;
-    venueCapacity?: number;
+    venueCapacity: number;
+    image: string;
 }

@@ -19,13 +19,13 @@ interface Props {children: ReactNode}
 export const SportsWorldProvider = ({children} : Props) => {
 
     const [athletes, setAthletes] = useState<IAthlete[]>([
-        {id: 99, name: "Context test athlete 1", purchaseStatus: false, price: 100000},
-        {id: 100, name: "Context test athlete 2", purchaseStatus: false, price: 200000}
+        {id: 99, name: "Context test athlete 1", purchaseStatus: false, price: 100000, gender: "male", image: ""},
+        {id: 100, name: "Context test athlete 2", purchaseStatus: false, price: 200000, gender: "male", image: ""}
     ]);
 
     const [venues, setVenues] = useState<IVenue[]>([
-        {id: 1, venueName: "Context test venue 1", venueCapacity: 52000},
-        {id: 2, venueName: "Context test venue 2", venueCapacity: 30400}
+        {id: 1, venueName: "Context test venue 1", venueCapacity: 52000, image: ""},
+        {id: 2, venueName: "Context test venue 2", venueCapacity: 30400, image: ""}
     ]);
 
     const [finance, setFinance]     = useState<IFinance | null>(null); 
