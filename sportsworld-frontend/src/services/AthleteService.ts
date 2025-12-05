@@ -27,12 +27,14 @@ const postAthlete = async (athlete: IAthlete) : Promise <IAthleteResponse> => {
         console.log(response);
         return {
             success: true,
-            data: response.data
+            data: response.data,
+            message: "",
         }
     }catch{
         return{
             success: false,
-            data: null
+            data: null,
+            message: "",
         }
     }
 }
