@@ -4,7 +4,7 @@ export interface IAthlete{
     purchaseStatus: boolean
     price: number
     gender: string
-    image?: string
+    image: string
     
     // legg til flere verdier etterhvert
 }
