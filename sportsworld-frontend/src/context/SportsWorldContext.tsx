@@ -18,10 +18,7 @@ interface Props {children: ReactNode}
 
 export const SportsWorldProvider = ({children} : Props) => {
 
-    const [athletes, setAthletes] = useState<IAthlete[]>([
-        {id: 99, name: "Context test athlete 1", purchaseStatus: false, price: 100000, gender: "male", image: ""},
-        {id: 100, name: "Context test athlete 2", purchaseStatus: false, price: 200000, gender: "male", image: ""}
-    ]);
+    const [athletes, setAthletes] = useState<IAthlete[]>([]);
 
     const [venues, setVenues] = useState<IVenue[]>([
         {id: 1, venueName: "Context test venue 1", venueCapacity: 52000, image: ""},
@@ -30,7 +27,22 @@ export const SportsWorldProvider = ({children} : Props) => {
 
     const [finance, setFinance]     = useState<IFinance | null>(null); 
     
-    useEffect(() => {}, []);
+    useEffect(() => {
+        console.log("SportsWorld kjørte nå");
+    
+        AthleteService.getAllAthletes().then(response => {
+            console.log("Svar fra backend:", response);
+    
+            if (response.success && response.data) {
+                console.log("Liste skal være her:", response.data);
+                setAthletes(response.data);
+            } else {
+                console.log("No success or no data");
+            }
+        }).catch(err => {
+            console.error("Alt failet:", err);
+        });
+    }, []);
 
     const setAthletesFromService = async () => {
         const response = await AthleteService.getAllAthletes();

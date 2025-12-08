@@ -9,7 +9,7 @@ using SportsWorldApi.Models;
 namespace SportsWorldApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 
 public class FinanceController(SportsWorldContext _sportsWorldContext) : ControllerBase //kanskje rename _sportsworldcontext til _financecontext?
 {

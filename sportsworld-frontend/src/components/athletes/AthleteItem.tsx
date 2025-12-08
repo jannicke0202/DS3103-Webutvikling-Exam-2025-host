@@ -13,22 +13,22 @@ const AthleteItem = ({ athlete, onEdit, onDelete} : Props): JSX.Element => {
         return `http://localhost:5242${imagePath}`;
     };
 
-    const imageUrl = getImageUrl(athlete.image);
+    const imageUrl = getImageUrl(athlete.Image);
 
     return (
         <div className="athlete-item">
             {/* JSX */}
             {imageUrl ? (
-                <img src={imageUrl} alt={`${athlete.name}'s picture`} />
+                <img src={imageUrl} alt={`${athlete.Name}'s picture`} />
             ) : (
                 <div className="placeholder-image">No photo</div>
             )}
 
             {/* Basic info */}
-            <h3>{athlete.name}</h3>
-            <p>Price: {athlete.price}</p>
-            <p>{athlete.purchaseStatus}</p>
-            <p>{athlete.gender}</p>
+            <h3>{athlete.Name}</h3>
+            <p>Price: {athlete.Price}</p>
+            <p>{athlete.PurchaseStatus}</p>
+            <p>{athlete.Gender}</p>
 
             {/* Funksjonsknapper i card*/}
             <div className="actions">

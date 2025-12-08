@@ -7,7 +7,7 @@ using SportsWorldApi.Models;
 namespace SportsWorldApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 
 public class VenueController(SportsWorldContext _sportsWorldContext) : ControllerBase
 {

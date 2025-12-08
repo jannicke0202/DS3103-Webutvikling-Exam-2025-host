@@ -6,17 +6,33 @@ import type {
   IAthletesResponse 
 } from "../interfaces/ResponseInterfaces";
 
-const endpoint = "http://localhost:5115/athlete";
+const endpoint = "http://localhost:5115/api";
 
 // GET all
 const getAllAthletes = async (): Promise<IAthletesResponse> => {
   try {
-    const response = await axios.get(endpoint);
+
+    const url = `${endpoint}/athletes`; // Usikker på URL
+
+    console.log("Spør etter backend:", url)
+
+    const response = await axios.get(url);
+
+    console.log("Status:", response.status);                 
+    console.log("Full response.data:", response.data);
+
+    
+
     return {
       success: true,
       data: response.data,
     };
-  } catch {
+  } catch (error: any) {
+    console.error("Axios error:", error.message);
+    if (error.response) {
+      console.error("Response status:", error.response.status);
+      console.error("Response data:", error.response.data);
+    }
     return {
       success: false,
       data: null,

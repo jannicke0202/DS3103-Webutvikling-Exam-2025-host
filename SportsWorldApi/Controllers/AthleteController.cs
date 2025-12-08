@@ -8,7 +8,7 @@ namespace SportsWorldApi.Controllers;
 
 // Følgende kode bygger på CRUD fra pensum (CreateReadUpdateDelete)
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AthleteController(SportsWorldContext _sportsWorldContext) : ControllerBase
 {
     // Get all

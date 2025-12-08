@@ -3,7 +3,10 @@ import { useSportsWorld } from "../../context/SportsWorldContext";
 const AvailableAthletes = () => {
   const { athletes, purchaseAthlete } = useSportsWorld();
 
-  const available = athletes.filter(a => !a.purchaseStatus);
+  console.log("Current athletes in context:", athletes);
+  console.log("Number of athletes:", athletes.length);
+
+  const available = athletes.filter(a => !a.PurchaseStatus);
 
   if (available.length === 0) {
     return (
@@ -24,13 +27,13 @@ const AvailableAthletes = () => {
           <div className="h-48 bg-gradient-to-br from-gray-300 to-gray-400 border-2 border-dashed border-gray-500"></div>
 
           <div className="p-6">
-            <h3 className="text-2xl font-extrabold text-gray-800">{athlete.name}</h3>
+            <h3 className="text-2xl font-extrabold text-gray-800">{athlete.Name}</h3>
             
 
             <div className="mt-6 flex justify-between items-center">
               <div>
                 <p className="text-3xl font-bold text-orange-600">
-                  {athlete.price.toLocaleString("de-DE")} NOK
+                  {athlete.Price.toLocaleString("de-DE")} NOK
                 </p>
                 <p className="text-sm text-gray-500">Transfer fee</p>
               </div>

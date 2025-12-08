@@ -1,10 +1,10 @@
 export interface IAthlete{
     id?: number
-    name: string
-    purchaseStatus: boolean
-    price: number
-    gender: string
-    image: string
-    
+    Name: string
+    Gender: string
+    Price: number
+    Image: string
+    PurchaseStatus: boolean
+
     // legg til flere verdier etterhvert
 }
