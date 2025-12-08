@@ -19,7 +19,7 @@ const AvailableAthletes = () => {
       {available.map((athlete) => (
         <div
           key={athlete.id}
-          className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-300 border border-gray-200"
+          className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-200"
         >
           <div className="h-48 bg-gradient-to-br from-gray-300 to-gray-400 border-2 border-dashed border-gray-500"></div>
 
