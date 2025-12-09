@@ -31,6 +31,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+DefaultFilesOptions options = new DefaultFilesOptions();
+options.DefaultFileNames.Add("index.html");
+app.UseDefaultFiles(options);
+
 app.UseStaticFiles();
 
 // Ny funksjon
