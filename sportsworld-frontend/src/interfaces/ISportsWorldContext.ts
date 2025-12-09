@@ -20,7 +20,7 @@ export interface ISportsWorldContext{
     deleteAthlete: (id: number) => Promise<IDefaultResponse>
 
     // finance
-    takeLoan: (amount: number) => Promise<IDefaultResponse>;
+    takeLoan: (amount: number) => Promise<void>;
 
     // venue
     saveVenue: (data: Omit<IVenue, "id">) => Promise<IDefaultResponse>;

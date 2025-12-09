@@ -5,6 +5,7 @@ import { type IFinance } from "../interfaces/IFinance";
 import { type ISportsWorldContext } from "../interfaces/ISportsWorldContext";
 import AthleteService from "../services/AthleteService";
 import type { IDefaultResponse } from "../interfaces/ResponseInterfaces";
+import axios from "axios";
 
 // legge til andre services når de er ferdig
 
@@ -43,7 +44,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     } catch (err: any) {
       console.error("Network or server error:", err.message);
       setError("Cannot connect to server. Is the backend running on http://localhost:5115?");
-      setAthletes([]); // ← Always fall back to empty array
+      setAthletes([]); 
     } finally {
       setLoading(false);
     }
@@ -52,6 +53,45 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
   useEffect(() => {
     loadData();
   }, []);
+
+  const purchaseAthlete = async (athleteId: number): Promise<void> => {
+    const athlete = athletes.find(a => a.id === athleteId);
+    if (!athlete || !finance) return;
+  
+    if (finance.moneyLeft < athlete.price) {
+      alert("Not enough money!");
+      return;
+    }
+  
+    try {
+      // Fjerne penger fra backend
+      const res = await axios.post("http://localhost:5115/api/Finance/Purchase", {
+        price: athlete.price
+      });
+      setFinance(res.data);
+  
+      // Endre status på om spiller er kjøpt
+      const toggleStatus = await AthleteService.togglePurchaseStatus(athleteId);
+      
+      if (toggleStatus.success && toggleStatus.data) {
+
+        setAthletes(prev => prev.map(a => 
+          a.id === athleteId ? (toggleStatus.data as IAthlete) : a
+        ));
+      }
+    } catch (err) {
+      alert("Purchase failed");
+    }
+  };
+  
+  const takeLoan = async (amount: number = 500000): Promise<void> => {
+    if (!finance) return;
+    setFinance({
+      ...finance,
+      moneyLeft: finance.moneyLeft + amount
+    });
+    alert(`Loan approved! +${amount.toLocaleString()} NOK`);
+  };
 
   const saveAthlete = async (newAthlete: Omit<IAthlete, "id">): Promise<IDefaultResponse> => { // Omit er gi å få alle felt fra IAthlete utenom id, pga backend genererer det
     try {
@@ -76,7 +116,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     saveAthlete,
     deleteAthlete: async () => ({ success: false, message: "Coming soon" }),
     purchaseAthlete: async () => ({ success: false, message: "Coming soon" }),
-    takeLoan: async () => ({ success: false, message: "Coming soon" }),
+    takeLoan,
     saveVenue: async () => ({ success: false, message: "Coming soon" }),
     getAthleteQuantity,
   };
