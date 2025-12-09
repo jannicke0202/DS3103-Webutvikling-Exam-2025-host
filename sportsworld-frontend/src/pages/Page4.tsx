@@ -2,8 +2,8 @@ const Page4 = () => {
     return (
         <>
         <header>
-            <h1>Page 4 placeholder</h1>
-            <p>Placeholder for page 4</p>
+            <h1>All venues down here:</h1>
+            <p>Placeholder for displaying all venues</p>
         </header>
         
         

@@ -7,5 +7,6 @@ import Page5 from "./Page5";
 export {
     HomePage,
     AdminPage,
-    NotFoundPage
+    NotFoundPage,
+    Page4
 }

@@ -18,11 +18,11 @@ const PageNavigation = () => {
         </Link>
 
         <Link to="/page4" className="text-white text-xl font-medium hover:text-cyan-400">
-          Page 4
+          See all venues
         </Link>
 
         <Link to="/page5" className="text-white text-xl font-medium hover:text-cyan-400">
-          Page 5
+          Add a venue
         </Link>
 
         <Link to="/*" className="text-white text-xl font-medium hover:text-cyan-400">
