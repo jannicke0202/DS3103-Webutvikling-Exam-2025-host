@@ -37,8 +37,8 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
         setAthletes([]);
       }
   
-      // Legger til venues / finances senere
-      // const [athleteRes, venueRes, financeRes] = await Promise.all([...]);
+      const financeResponse = await axios.get("http://localhost:5115/api/Finance");
+      setFinance(financeResponse.data);
       // samme sjekk for alle
   
     } catch (err: any) {
@@ -65,19 +65,17 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
   
     try {
       // Fjerne penger fra backend
-      const res = await axios.post("http://localhost:5115/api/Finance/Purchase", {
+      const financeRes = await axios.post("http://localhost:5115/api/Finance/purchase", {
         price: athlete.price
       });
-      setFinance(res.data);
+      setFinance(financeRes.data);
   
-      // Endre status på om spiller er kjøpt
-      const toggleStatus = await AthleteService.togglePurchaseStatus(athleteId);
-      
-      if (toggleStatus.success && toggleStatus.data) {
-
-        setAthletes(prev => prev.map(a => 
-          a.id === athleteId ? (toggleStatus.data as IAthlete) : a
-        ));
+      // Endre status på spiller fra false-true
+      const togglePurchaseStatus = await AthleteService.togglePurchaseStatus(athleteId);
+      if (togglePurchaseStatus.success && togglePurchaseStatus.data) {
+        setAthletes(prev =>
+          prev.map(a => (a.id === athleteId ? togglePurchaseStatus.data as IAthlete : a))
+        );
       }
     } catch (err) {
       alert("Purchase failed");

@@ -55,4 +55,30 @@ public class FinanceController(SportsWorldContext context) : ControllerBase
     {
         public int Price { get; set; }
     }
+
+    [HttpPost("reset")]
+public async Task<ActionResult<Finance>> Reset()
+{
+    var finance = await context.Finances.FirstOrDefaultAsync();
+
+    if (finance == null)
+    {
+        finance = new Finance
+        {
+            MoneyLeft = 2_000_000,
+            MoneySpent = 0,
+            NumberOfPurchases = 0
+        };
+        context.Finances.Add(finance);
+    }
+    else
+    {
+        finance.MoneyLeft = 2_000_000;
+        finance.MoneySpent = 0;
+        finance.NumberOfPurchases = 0;
+    }
+
+    await context.SaveChangesAsync();
+    return Ok(finance);
+}
 }
