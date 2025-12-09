@@ -31,6 +31,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
 // Ny funksjon
 
 using (var scope = app.Services.CreateScope())
