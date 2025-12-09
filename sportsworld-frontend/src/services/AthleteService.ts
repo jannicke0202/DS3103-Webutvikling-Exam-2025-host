@@ -12,16 +12,9 @@ const endpoint = "http://localhost:5115/api";
 const getAllAthletes = async (): Promise<IAthletesResponse> => {
   try {
 
-    const url = `${endpoint}/athletes`; // Usikker på URL
-
-    console.log("Spør etter backend:", url)
+    const url = `${endpoint}/Athlete`; // Usikker på URL
 
     const response = await axios.get(url);
-
-    console.log("Status:", response.status);                 
-    console.log("Full response.data:", response.data);
-
-    
 
     return {
       success: true,

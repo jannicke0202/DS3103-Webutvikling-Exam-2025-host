@@ -1,118 +1,97 @@
-import { useState, createContext, type ReactNode, Children, useEffect, useContext } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { type IAthlete } from "../interfaces/IAthlete";
-import { type ISportsWorldContext } from "../interfaces/ISportsWorldContext";
-import AthleteService from "../services/AthleteService";
-import { type IDefaultResponse } from "../interfaces/ResponseInterfaces";
 import { type IVenue } from "../interfaces/IVenue";
 import { type IFinance } from "../interfaces/IFinance";
+import { type ISportsWorldContext } from "../interfaces/ISportsWorldContext";
+import AthleteService from "../services/AthleteService";
+import type { IDefaultResponse } from "../interfaces/ResponseInterfaces";
 
+// legge til andre services når de er ferdig
 
+export const SportsWorldContext = createContext<ISportsWorldContext | undefined>(undefined);
 
-
-
-// Context
-export const SportsWorldContext = createContext<ISportsWorldContext | null>(null);
-
-
-interface Props {children: ReactNode}
-
-export const SportsWorldProvider = ({children} : Props) => {
-
-    const [athletes, setAthletes] = useState<IAthlete[]>([]);
-
-    const [venues, setVenues] = useState<IVenue[]>([
-        {id: 1, venueName: "Context test venue 1", venueCapacity: 52000, image: ""},
-        {id: 2, venueName: "Context test venue 2", venueCapacity: 30400, image: ""}
-    ]);
-
-    const [finance, setFinance]     = useState<IFinance | null>(null); 
-    
-    useEffect(() => {
-        console.log("SportsWorld kjørte nå");
-    
-        AthleteService.getAllAthletes().then(response => {
-            console.log("Svar fra backend:", response);
-    
-            if (response.success && response.data) {
-                console.log("Liste skal være her:", response.data);
-                setAthletes(response.data);
-            } else {
-                console.log("No success or no data");
-            }
-        }).catch(err => {
-            console.error("Alt failet:", err);
-        });
-    }, []);
-
-    const setAthletesFromService = async () => {
-        const response = await AthleteService.getAllAthletes();
-        if( response.success === true && response.data != null){
-            setAthletes(response.data)
-        }
-    }
-
-
-    const getAthleteQuantity = () : number => {
-        return athletes.length;
-    }
-
-    const saveAthlete = async (newAthlete: IAthlete) : Promise<IDefaultResponse> => {
-
-        const response = await AthleteService.postAthlete(newAthlete);
-
-        if ( response.success === true && response.data != null ){
-            const newAthleteWithId : IAthlete = response.data;
-
-            setAthletes (
-                prev => [newAthleteWithId, ...prev]
-            );
-        }
-
-        return response;
-    }
-
-    const deleteAthlete = async (id: number): Promise<IDefaultResponse> => {
-        console.log("deleteAthlete not ready yet", id);
-        return { success: false, message: "Not implemented" };
-      };
-    
-      const purchaseAthlete = async (id: number): Promise<IDefaultResponse> => {
-        console.log("purchaseAthlete not ready yet", id);
-        return { success: false, message: "Not implemented" };
-      };
-    
-      const takeLoan = async (amount: number): Promise<IDefaultResponse> => {
-        console.log("takeLoan not ready yet", amount);
-        return { success: false, message: "Not implemented" };
-      };
-    
-      const saveVenue = async (data: Omit<IVenue, "id">): Promise<IDefaultResponse> => {
-        console.log("saveVenue not ready yet", data);
-        return { success: false, message: "Not implemented" };
-      };
-
-    return (
-        <SportsWorldContext.Provider value={{
-            athletes,
-            venues,
-            finance,
-            
-            saveAthlete,
-            deleteAthlete,
-            purchaseAthlete,
-            takeLoan,
-            saveVenue,
-
-            getAthleteQuantity,
-        } as ISportsWorldContext}>{children}</SportsWorldContext.Provider>
-    )
-
+interface SportsWorldProviderProps {
+  children: ReactNode;
 }
 
-export const useSportsWorld = () => {
-    const context = useContext(SportsWorldContext);
-    if (!context) {
-      throw new Error("useSportsWorld must be used within a SportsWorldProvider");
+export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
+  const [athletes, setAthletes] = useState<IAthlete[]>([]);
+  const [venues, setVenues] = useState<IVenue[]>([]);
+  const [finance, setFinance] = useState<IFinance | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Laster inn all data
+  const loadData = async () => {
+    setLoading(true);
+    setError(null);
+  
+    try {
+      const athleteResponse = await AthleteService.getAllAthletes();
+  
+      if (athleteResponse.success && Array.isArray(athleteResponse.data)) {
+        setAthletes(athleteResponse.data);
+      } else {
+        console.warn("No valid athlete data received:", athleteResponse);
+        setAthletes([]);
+      }
+  
+      // Legger til venues / finances senere
+      // const [athleteRes, venueRes, financeRes] = await Promise.all([...]);
+      // samme sjekk for alle
+  
+    } catch (err: any) {
+      console.error("Network or server error:", err.message);
+      setError("Cannot connect to server. Is the backend running on http://localhost:5115?");
+      setAthletes([]); // ← Always fall back to empty array
+    } finally {
+      setLoading(false);
     }
-    return context;
   };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const saveAthlete = async (newAthlete: Omit<IAthlete, "id">): Promise<IDefaultResponse> => { // Omit er gi å få alle felt fra IAthlete utenom id, pga backend genererer det
+    try {
+      const response = await AthleteService.postAthlete(newAthlete);
+      if (response.success && response.data) {
+        setAthletes(prev => [response.data!, ...prev]) // ! pga backend alltid skal generere id
+      }
+      return response;
+    } catch (err) {
+      return { success: false, message: "Failed to save athlete" };
+    }
+  };
+
+  const getAthleteQuantity = () => athletes.length;
+
+  const value: ISportsWorldContext = {
+    athletes,
+    venues,
+    finance,
+    loading,
+    error,
+    saveAthlete,
+    deleteAthlete: async () => ({ success: false, message: "Coming soon" }),
+    purchaseAthlete: async () => ({ success: false, message: "Coming soon" }),
+    takeLoan: async () => ({ success: false, message: "Coming soon" }),
+    saveVenue: async () => ({ success: false, message: "Coming soon" }),
+    getAthleteQuantity,
+  };
+
+  return (
+    <SportsWorldContext.Provider value={value}>
+      {children}
+    </SportsWorldContext.Provider>
+  );
+};
+
+export const useSportsWorld = (): ISportsWorldContext => {
+  const context = useContext(SportsWorldContext);
+  if (!context) {
+    throw new Error("useSportsWorld must be used within SportsWorldProvider");
+  }
+  return context;
+};

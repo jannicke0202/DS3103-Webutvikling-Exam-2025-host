@@ -13,6 +13,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    });
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>

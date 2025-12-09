@@ -6,13 +6,18 @@ import type { IDefaultResponse } from "./ResponseInterfaces";
 export interface ISportsWorldContext{
 
     // data
-    athletes: IAthlete[],
-    finance: IFinance | null,
-    venues: IVenue[],
+    athletes: IAthlete[]
+    finance: IFinance | null
+    venues: IVenue[]
+
+    // UI status
+    loading: boolean,
+    error: string | null
 
     // athlete functions
     saveAthlete: (newAthlete: IAthlete) => Promise<IDefaultResponse>,
     purchaseAthlete: (id: number) => Promise<IDefaultResponse>;
+    deleteAthlete: (id: number) => Promise<IDefaultResponse>
 
     // finance
     takeLoan: (amount: number) => Promise<IDefaultResponse>;
@@ -23,4 +28,5 @@ export interface ISportsWorldContext{
     // helper
     getAthleteQuantity: () => number
 
-}
+} 
+
