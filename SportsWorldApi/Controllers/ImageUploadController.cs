@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SportsWorldApi.Controllers;
 
 [ApiController]
-[Route("/api/controller")]
+[Route("/api/[controller]")]
 
 public class ImageUploadController(IWebHostEnvironment _webHostEnvironment) : ControllerBase
 {
