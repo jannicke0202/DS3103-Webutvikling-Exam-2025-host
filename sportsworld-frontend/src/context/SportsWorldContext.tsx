@@ -103,6 +103,21 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     }
   };
 
+  // Add this function in your context
+const deleteAthlete = async (id: number): Promise<void> => {
+    if (!confirm("Are you sure you want to delete this player?")) return;
+  
+    try {
+      await AthleteService.deleteAthlete(id); // calls your DELETE endpoint
+      setAthletes(prev => prev.filter(a => a.id !== id));
+      alert("Player deleted!");
+    } catch (err) {
+      alert("Delete failed");
+    }
+  };
+  
+  // EDIT ATHLETE FUNKSJON ETTERHVERT
+
   const getAthleteQuantity = () => athletes.length;
 
   const value: ISportsWorldContext = {
@@ -112,7 +127,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     loading,
     error,
     saveAthlete,
-    deleteAthlete: async () => ({ success: false, message: "Coming soon" }),
+    deleteAthlete,
     purchaseAthlete: async () => ({ success: false, message: "Coming soon" }),
     takeLoan,
     saveVenue: async () => ({ success: false, message: "Coming soon" }),

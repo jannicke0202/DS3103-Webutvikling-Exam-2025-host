@@ -2,7 +2,7 @@ import AthleteCard from "../components/athletes/AthleteCard"
 import { useSportsWorld } from "../context/SportsWorldContext"
 
 const HomePage = () => {
-    const {athletes} = useSportsWorld();
+    const {athletes, deleteAthlete} = useSportsWorld();
 
     if (!athletes || athletes.length === 0) {
         return (
@@ -31,7 +31,7 @@ const HomePage = () => {
                   key={athlete.id}
                   athlete={athlete}
                   onEdit={() => alert("Funksjon ikke klar enda" )}
-                  onDelete={() => alert("Funksjon ikke klar enda")}
+                  onDelete={deleteAthlete}
                 />
               ))}
             </div>

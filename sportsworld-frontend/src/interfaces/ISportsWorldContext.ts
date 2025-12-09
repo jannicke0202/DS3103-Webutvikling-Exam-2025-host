@@ -17,7 +17,7 @@ export interface ISportsWorldContext{
     // athlete functions
     saveAthlete: (newAthlete: IAthlete) => Promise<IDefaultResponse>,
     purchaseAthlete: (id: number) => Promise<IDefaultResponse>;
-    deleteAthlete: (id: number) => Promise<IDefaultResponse>
+    deleteAthlete: (id: number) => Promise<void>
 
     // finance
     takeLoan: (amount: number) => Promise<void>;
