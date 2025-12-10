@@ -19,7 +19,7 @@ export default function FinancialSummary() {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
       <div> 
         <h3>Money Left</h3>
-          {finance.moneyLeft.toLocaleString("de-DE")} NOK
+          £ {finance.moneyLeft.toLocaleString("de-DE")} 
       </div>
 
       <div>
@@ -30,7 +30,7 @@ export default function FinancialSummary() {
 
       <div> 
       <h3>Total money spent:</h3>
-          {finance.moneySpent.toLocaleString("de-DE")} NOK
+         £ {finance.moneySpent.toLocaleString("de-DE")} 
       </div>
 
     <button onClick={async () => {
@@ -43,7 +43,7 @@ export default function FinancialSummary() {
           alert ("reset failed")
         }
       }
-    }} className="rounded-xl mt-8 w-full py-4 bg-red-500 cursor-pointer">Reset session</button>
+    }} className="rounded-xl mt-8 w-50 py-4 bg-red-500 cursor-pointer">Reset session</button>
 
     </div>
   );

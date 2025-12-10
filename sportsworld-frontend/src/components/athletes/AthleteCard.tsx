@@ -46,7 +46,7 @@ const AthleteCard = ({ athlete, onEdit, onDelete }: Props) => {
       <h3 style={{ margin: "12px 0 8px 0", fontSize: "20px", textAlign: "center" }}>
         {athlete.name}
       </h3>
-      <p><strong>Price:</strong> {athlete.price.toLocaleString()} NOK</p>
+      <p><strong>Price:</strong> £ {athlete.price.toLocaleString()}</p>
       <p><strong>Status:</strong> {athlete.purchaseStatus ? "Bought" : "Available"}</p>
       <p><strong>Gender:</strong> {athlete.gender}</p>
 
