@@ -182,8 +182,6 @@ public class AthleteController(SportsWorldContext _sportsWorldContext) : Control
     }
 }
 
-
-
 /*[ApiController]
 [Route("[controller]")]
 public class AthleteController(SportsWorldContext _sportsWorldContext) : ControllerBase

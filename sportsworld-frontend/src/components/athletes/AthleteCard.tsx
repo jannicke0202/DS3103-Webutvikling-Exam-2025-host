@@ -6,21 +6,24 @@ interface Props {
   onDelete: (id: number) => void;
 }
 
-export default function AthleteCard({ athlete, onEdit, onDelete }: Props) {
+const AthleteCard = ({ athlete, onEdit, onDelete }: Props) => {
   // om bilde er tilgjengelig, ellers vis placeholder
   const imageUrl = athlete.image
-    ? `http://localhost:5242${athlete.image}`
+    ? `http://localhost:5115/${athlete.image}`
     : null;
 
   return (
-    <div className="athlete-item" style={{ border: "1px solid #ddd", padding: "16px", borderRadius: "8px", marginBottom: "16px" }}>
+    <div className="athlete-item" style={{ border: "1px solid #ddd", 
+    padding: "12px", borderRadius: "32px", marginBottom: "16px", width: "75%" }}>
       
       {/* Player photo */}
       {imageUrl ? (
         <img 
           src={imageUrl} 
           alt={athlete.name} 
-          style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px" }} 
+          style={{ width: "full", height: "300px", objectFit: "cover", borderRadius: "16px",
+            margin: "0 auto"
+           }} 
         />
       ) : (
         <div style={{ 
@@ -32,14 +35,15 @@ export default function AthleteCard({ athlete, onEdit, onDelete }: Props) {
           justifyContent: "center",
           borderRadius: "8px",
           color: "#999",
-          fontSize: "18px"
+          fontSize: "18px",
+          margin: "0 auto"
         }}>
           No photo
         </div>
       )}
 
       {/* Player info */}
-      <h3 style={{ margin: "12px 0 8px 0", fontSize: "20px" }}>
+      <h3 style={{ margin: "12px 0 8px 0", fontSize: "20px", textAlign: "center" }}>
         {athlete.name}
       </h3>
       <p><strong>Price:</strong> {athlete.price.toLocaleString()} NOK</p>
@@ -64,3 +68,5 @@ export default function AthleteCard({ athlete, onEdit, onDelete }: Props) {
     </div>
   );
 }
+
+export default AthleteCard
