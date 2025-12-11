@@ -1,12 +1,13 @@
 import { type IAthlete } from "../../interfaces/IAthlete";
 
-interface Props {
-  athlete: IAthlete;
+
+const AthleteCard = ({ athlete, onEdit, onDelete }: {
+  athlete: IAthlete; 
   onEdit: (athlete: IAthlete) => void;
   onDelete: (id: number) => void;
-}
+}) => {
 
-const AthleteCard = ({ athlete, onEdit, onDelete }: Props) => {
+
   // om bilde er tilgjengelig, ellers vis placeholder
   const imageUrl = athlete.image
     ? `http://localhost:5115/${athlete.image}`

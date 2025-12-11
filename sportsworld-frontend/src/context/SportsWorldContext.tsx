@@ -103,12 +103,13 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     }
   };
 
+
   // Add this function in your context
-const deleteAthlete = async (id: number): Promise<void> => {
+  const deleteAthlete = async (id: number): Promise<void> => {
     if (!confirm("Are you sure you want to delete this player?")) return;
   
     try {
-      await AthleteService.deleteAthlete(id); // calls your DELETE endpoint
+      await AthleteService.deleteAthlete(id); 
       setAthletes(prev => prev.filter(a => a.id !== id));
       alert("Player deleted!");
     } catch (err) {
