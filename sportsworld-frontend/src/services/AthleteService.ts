@@ -1,9 +1,9 @@
 import axios from "axios";
 import type { IAthlete } from "../interfaces/IAthlete";
-import type { 
-  IDefaultResponse, 
-  IAthleteResponse, 
-  IAthletesResponse 
+import type {
+  IDefaultResponse,
+  IAthleteResponse,
+  IAthletesResponse
 } from "../interfaces/ResponseInterfaces";
 
 const endpoint = "http://localhost:5115/api";
@@ -73,7 +73,7 @@ const searchAthletesByName = async (name: string): Promise<IAthletesResponse> =>
 // POST create
 const postAthlete = async (athlete: IAthlete): Promise<IAthleteResponse> => {
   try {
-    const response = await axios.post(endpoint, athlete);
+    const response = await axios.post(`${endpoint}/athlete`, athlete);
     return {
       success: true,
       data: response.data,
