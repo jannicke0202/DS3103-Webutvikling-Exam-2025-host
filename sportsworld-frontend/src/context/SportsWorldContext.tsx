@@ -56,6 +56,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
 
   const purchaseAthlete = async (athleteId: number): Promise<void> => {
     const athlete = athletes.find(a => a.id === athleteId);
+    
     if (!athlete || !finance) return;
   
     if (finance.moneyLeft < athlete.price) {
@@ -64,23 +65,26 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     }
   
     try {
-      // Fjerne penger fra backend
-      const financeRes = await axios.post("http://localhost:5115/api/Finance/purchase", {
-        price: athlete.price
-      });
-      setFinance(financeRes.data);
-  
-      // Endre status på spiller fra false-true
+      // endring av status, penger og antall kjøp
+
       const togglePurchaseStatus = await AthleteService.togglePurchaseStatus(athleteId);
       if (togglePurchaseStatus.success && togglePurchaseStatus.data) {
-        setAthletes(prev =>
+        setAthletes( prev => 
           prev.map(a => (a.id === athleteId ? togglePurchaseStatus.data as IAthlete : a))
         );
       }
+
+      setFinance(prev => ({
+        ...prev!,
+        moneyLeft: prev!.moneyLeft - athlete.price,
+        moneySpent: prev!.moneySpent + athlete.price,
+        numberOfPurchases: prev!.numberOfPurchases +1,
+      }));
     } catch (err) {
       alert("Purchase failed");
     }
   };
+  
   
   const takeLoan = async (amount: number = 500000): Promise<void> => {
     if (!finance) return;
@@ -129,7 +133,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     error,
     saveAthlete,
     deleteAthlete,
-    purchaseAthlete: async () => ({ success: false, message: "Coming soon" }),
+    purchaseAthlete,
     takeLoan,
     saveVenue: async () => ({ success: false, message: "Coming soon" }),
     getAthleteQuantity,

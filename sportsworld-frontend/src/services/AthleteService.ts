@@ -92,7 +92,7 @@ const postAthlete = async (athlete: IAthlete): Promise<IAthleteResponse> => {
 // PUT update
 const putAthlete = async (athlete: IAthlete): Promise<IAthleteResponse> => {
   try {
-    const response = await axios.put(`${endpoint}/${athlete.id}`, athlete);
+    const response = await axios.put(`${endpoint}/athlete/${athlete.id}`, athlete);
     return {
       success: true,
       data: response.data,
@@ -110,11 +110,11 @@ const putAthlete = async (athlete: IAthlete): Promise<IAthleteResponse> => {
 // PATCH purchase toggle
 const togglePurchaseStatus = async (id: number): Promise<IAthleteResponse> => {
   try {
-    const response = await axios.patch(`${endpoint}/${id}/purchase`);
+    const response = await axios.patch(`${endpoint}/athlete/${id}/purchase`);
     return {
       success: true,
       data: response.data,
-      message: "",
+      message: "Kjøpt spiller",
     };
   } catch {
     return {
