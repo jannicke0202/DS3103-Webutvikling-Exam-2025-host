@@ -8,5 +8,6 @@ export {
     HomePage,
     AdminPage,
     NotFoundPage,
-    Page4
+    Page4,
+    Page5
 }
