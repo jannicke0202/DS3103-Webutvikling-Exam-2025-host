@@ -18,13 +18,13 @@ export interface ISportsWorldContext {
   purchaseAthlete: (id: number) => Promise<void>;
   deleteAthlete: (id: number) => Promise<void>;
 
-  updateAthlete: (updated: IAthlete) => Promise<void>;
+  // updateAthlete: (updated: IAthlete) => Promise<void>;
 
   // finance
   takeLoan: (amount: number) => Promise<void>;
 
  
-  saveVenue: (data: Omit<IVenue, "id">) => Promise<void>;
+  saveVenue: (data: Omit<IVenue, "id">) => Promise<IDefaultResponse>;
   // ikke implementert enda, derfor optional
   deleteVenue?: (id: number) => Promise<void>;
 
