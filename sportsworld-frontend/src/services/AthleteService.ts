@@ -20,6 +20,7 @@ const getAllAthletes = async (): Promise<IAthletesResponse> => {
       success: true,
       data: response.data,
     };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Axios error:", error.message);
     if (error.response) {
@@ -127,7 +128,7 @@ const togglePurchaseStatus = async (id: number): Promise<IAthleteResponse> => {
 // DELETE
 const deleteAthlete = async (id: number): Promise<IDefaultResponse> => {
   try {
-    await axios.delete(`${endpoint}/${id}`);
+    await axios.delete(`${endpoint}/athlete/${id}`);
     return {
       success: true,
       message: "",
