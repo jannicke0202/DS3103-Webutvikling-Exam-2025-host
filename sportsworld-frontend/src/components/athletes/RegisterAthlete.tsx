@@ -31,7 +31,7 @@ export default function RegisterAthlete() {
       image: "",
     });
 
-    setIsLoading(false); 
+    setIsLoading(false);
 
     if (result.success) {
       setName("");
@@ -69,6 +69,7 @@ export default function RegisterAthlete() {
           className="w-full px-5 py-4 border rounded-xl text-lg"
           disabled={isLoading}
         >
+          <option>Choose a gender</option>
           <option>Male</option>
           <option>Female</option>
         </select>
@@ -92,7 +93,7 @@ export default function RegisterAthlete() {
           {isLoading ? "Saving..." : "Add to Transfer List"}
         </button>
         <div className="my-8">
-            <ImageUpload onImageSelected={setSelectedImage}/>
+          <ImageUpload onImageSelected={setSelectedImage} />
         </div>
       </form>
     </div>
