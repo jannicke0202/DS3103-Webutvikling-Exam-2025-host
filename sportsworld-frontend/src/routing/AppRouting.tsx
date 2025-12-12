@@ -3,8 +3,8 @@ import { AdminPage, HomePage } from "../pages";
 import PageFooter from "../components/shared/PageFooter";
 import PageNavigation from "../components/shared/PageNavigation";
 import RegisterPage from "../pages/RegisterPage";
-import Page4 from "../pages/AddVenue";
-import Page5 from "../pages/SeeVenues";
+import Page4 from "../pages/SeeVenues";
+import Page5 from "../pages/AddVenue";
 import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRouting = () => {
