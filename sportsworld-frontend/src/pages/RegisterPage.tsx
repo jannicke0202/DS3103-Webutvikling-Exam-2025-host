@@ -1,5 +1,3 @@
-// src/pages/RegisterPage.tsx (or wherever your pages are)
-
 import RegisterAthlete from "../components/athletes/RegisterAthlete";
 import ImageUpload from "../components/shared/ImageUpload";
 
@@ -11,12 +9,9 @@ export default function RegisterPage() {
           Register New Athlete
         </h1>
         <p className="text-center text-xl text-gray-600 mb-12">
-          Add a superstar to the transfer market
+          Legg til ny spiller
         </p>
-
-        {/* This component already has its own form, state, and handleSubmit */}
         <RegisterAthlete />
-        
       </div>
     </div>
   );

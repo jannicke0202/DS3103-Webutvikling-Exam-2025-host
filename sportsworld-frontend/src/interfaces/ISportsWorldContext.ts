@@ -3,32 +3,33 @@ import type { IFinance } from "./IFinance";
 import type { IVenue } from "./IVenue";
 import type { IDefaultResponse } from "./ResponseInterfaces";
 
-export interface ISportsWorldContext{
+export interface ISportsWorldContext {
+  // data
+  athletes: IAthlete[];
+  finance: IFinance | null;
+  venues: IVenue[];
 
-    // data
-    athletes: IAthlete[]
-    finance: IFinance | null
-    venues: IVenue[]
+  loading: boolean;
+  error: string | null;
 
-    // UI status
-    loading: boolean,
-    error: string | null
+  // athlete functions
+  // newAthlete uten id, siden backend genererer id
+  saveAthlete: (newAthlete: Omit<IAthlete, "id">) => Promise<IDefaultResponse>;
+  purchaseAthlete: (id: number) => Promise<void>;
+  deleteAthlete: (id: number) => Promise<void>;
 
-    // athlete functions
-    saveAthlete: (newAthlete: IAthlete) => Promise<IDefaultResponse>,
-    purchaseAthlete: (id: number) => Promise<void>;
-    deleteAthlete: (id: number) => Promise<void>
+  updateAthlete: (updated: IAthlete) => Promise<void>;
 
-    // finance
-    takeLoan: (amount: number) => Promise<void>;
+  // finance
+  takeLoan: (amount: number) => Promise<void>;
 
-    // venue functions
-    saveVenue: (data: Omit<IVenue, "id">) => Promise<IDefaultResponse>;
-    deleteVenue: (id: number) => Promise<void>
-    //mer venue functions etter hvert
+ 
+  saveVenue: (data: Omit<IVenue, "id">) => Promise<void>;
+  // ikke implementert enda, derfor optional
+  deleteVenue?: (id: number) => Promise<void>;
 
-    // helper
-    getAthleteQuantity: () => number
+  
 
-} 
-
+  // helper
+  getAthleteQuantity: () => number;
+}
