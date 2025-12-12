@@ -22,8 +22,10 @@ export interface ISportsWorldContext{
     // finance
     takeLoan: (amount: number) => Promise<void>;
 
-    // venue
+    // venue functions
     saveVenue: (data: Omit<IVenue, "id">) => Promise<IDefaultResponse>;
+    deleteVenue: (id: number) => Promise<void>
+    //mer venue functions etter hvert
 
     // helper
     getAthleteQuantity: () => number
