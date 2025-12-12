@@ -52,3 +52,25 @@ const postVenue = async (venue: IVenue): Promise<IVenueResponse> => {
     };
   }
 };
+
+// DELETE
+const deleteVenue = async (id: number): Promise<IDefaultResponse> => {
+  try {
+    await axios.delete(`${endpoint}/venue/${id}`);
+    return {
+      success: true,
+      message: "",
+    };
+  } catch {
+    return {
+      success: false,
+      message: "Could not delete venue",
+    };
+  }
+};
+
+export default {
+  getAllVenues,
+  postVenue,
+  deleteVenue,
+};
