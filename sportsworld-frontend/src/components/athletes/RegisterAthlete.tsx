@@ -10,7 +10,7 @@ export default function RegisterAthlete() {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [price, setPrice] = useState("");
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -18,6 +18,10 @@ export default function RegisterAthlete() {
 
     if (!name.trim() || !price || Number(price) <= 0) {
       alert("Please fill in all fields correctly");
+      return;
+    }
+    if (!selectedImage) {
+      alert("Please upload an image");
       return;
     }
 
@@ -28,7 +32,7 @@ export default function RegisterAthlete() {
       gender,
       price: Number(price),
       purchaseStatus: false,
-      image: "",
+      image: selectedImage,
     });
 
     setIsLoading(false);
