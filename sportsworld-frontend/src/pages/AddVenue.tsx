@@ -12,26 +12,32 @@ function AddVenue() {
     const [success, setSuccess] = useState<string | null>(null);
 
     const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        setError(null);
-        setSuccess(null);
+  e.preventDefault();
+  setError(null);
+  setSuccess(null);
 
-        if (!name.trim() || !capacity.trim()) {
-            setError("Name and capacity are required");
-            return;
-        }
+  if (!name.trim() || !capacity.trim()) {
+    setError("Name and capacity are required");
+    return;
+  }
 
-        await saveVenue({
-            name: name.trim(),
-            capacity: Number(capacity.trim),
-            image: image.trim(),
-        });
+  const response = await saveVenue({
+    name: name.trim(),
+    capacity: capacity.trim(),    // string matcher IVenue + C#
+    image: image.trim(),
+  });
 
-        setSuccess("Venue saved");
-        setName("");
-        setCapacity("");
-        setImage("");
-    };
+  if (!response.success) {
+    setError(response.message ?? "Failed to save venue");
+    return;
+  }
+
+  setSuccess("Venue saved");
+  setName("");
+  setCapacity("");
+  setImage("");
+};
+
 
     return (
         <main className="p-8 max-w-xl mx-auto">

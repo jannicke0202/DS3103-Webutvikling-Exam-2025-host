@@ -108,17 +108,21 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     }
   };
 
-  const saveVenue = async (newVenue: Omit<IVenue, "id">): Promise<IDefaultResponse> => {
-    try {
-      const response = await VenueService.postVenue(newVenue);
-      if (response.success && response.data) {
-        setVenues(prev => [response.data!, ...prev])
-      }
-      return response;
-    } catch (err) {
-      return { success: false, message: "Failed to save venue"}
-    }
+  const saveVenue = async (
+  venue: Omit<IVenue, "id">
+): Promise<IDefaultResponse> => {
+  try {
+    const res = await axios.post<IVenue>(
+      "http://localhost:5115/api/Venue",
+      venue
+    );
+    setVenues((prev) => [...prev, res.data]);
+    return { success: true, message: "Venue saved" };
+  } catch (err) {
+    console.error("Failed to save venue", err);
+    return { success: false, message: "Failed to save venue" };
   }
+};
 
 
   // Add this function in your context
