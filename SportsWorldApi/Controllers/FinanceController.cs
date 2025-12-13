@@ -9,6 +9,9 @@ namespace SportsWorldApi.Controllers;
 [Route("api/[controller]")]
 public class FinanceController(SportsWorldContext context) : ControllerBase
 {
+
+    private const int FinanceId = 1;
+
     [HttpGet()]
     public async Task<ActionResult<Finance>> Get()
     {
@@ -19,6 +22,7 @@ public class FinanceController(SportsWorldContext context) : ControllerBase
         {
             finance = new Finance
             {
+                Id = FinanceId,
                 MoneyLeft = 2000000,
                 MoneySpent = 0,
                 NumberOfPurchases = 0
@@ -30,7 +34,7 @@ public class FinanceController(SportsWorldContext context) : ControllerBase
         return Ok(finance);
     }
 
-    [HttpPost("purchase")]
+    [HttpPost("purchase/{price}")]
     public async Task<ActionResult<Finance>> Purchase(int price)
     {
         var finance = await context.Finances.FirstOrDefaultAsync();
@@ -45,6 +49,20 @@ public class FinanceController(SportsWorldContext context) : ControllerBase
         finance.MoneySpent     += price;
         finance.NumberOfPurchases += 1;
 
+        await context.SaveChangesAsync();
+
+        return Ok(finance);
+    }
+
+    [HttpPost("loan/{amount}")]
+    public async Task<ActionResult<Finance>> Loan(int amount)
+    {
+        var finance = await context.Finances.FindAsync(FinanceId);
+
+        if (finance == null)
+            return NotFound();
+
+        finance.MoneyLeft += amount;
         await context.SaveChangesAsync();
 
         return Ok(finance);

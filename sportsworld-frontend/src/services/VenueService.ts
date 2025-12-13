@@ -13,7 +13,7 @@ const endpoint = "http://localhost:5115/api";
 const getAllVenues = async (): Promise<IVenuesResponse> => {
   try {
 
-    const url = `${endpoint}/Venues`; // Usikker på URL
+    const url = `${endpoint}/Venue`; // Usikker på URL
 
     const response = await axios.get(url);
 

@@ -4,9 +4,11 @@ import { type IVenue } from "../interfaces/IVenue";
 import { type IFinance } from "../interfaces/IFinance";
 import { type ISportsWorldContext } from "../interfaces/ISportsWorldContext";
 import AthleteService from "../services/AthleteService";
+import VenueService from "../services/VenueService";
+import FinanceService from "../services/FinanceService";
 import type { IDefaultResponse } from "../interfaces/ResponseInterfaces";
 import axios from "axios";
-import VenueService from "../services/VenueService";
+
 
 // legge til andre services når de er ferdig
 
@@ -27,33 +29,42 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
   const loadData = async () => {
     setLoading(true);
     setError(null);
+
+    
   
     try {
+      // kalle på venues
+      const venueResponse = await VenueService.getAllVenues();
+      if (venueResponse.success && Array.isArray(venueResponse.data)){
+        setVenues(venueResponse.data);
+      } 
+
+      // Kalle på athletes
       const athleteResponse = await AthleteService.getAllAthletes();
-  
       if (athleteResponse.success && Array.isArray(athleteResponse.data)) {
         setAthletes(athleteResponse.data);
-      } else {
-        console.warn("No valid athlete data received:", athleteResponse);
-        setAthletes([]);
-      }
+      } 
   
-      const financeResponse = await axios.get("http://localhost:5115/api/Finance");
-      setFinance(financeResponse.data);
-      // samme sjekk for alle
+      // kalle på finance
+      const financeResponse = await FinanceService.getFinance();
+      if (financeResponse.success && financeResponse.data) {
+        setFinance(financeResponse.data)
+      } 
+      
   
     } catch (err: any) {
-      console.error("Network or server error:", err.message);
-      setError("Cannot connect to server. Is the backend running on http://localhost:5115?");
-      setAthletes([]); 
-    } finally {
-      setLoading(false);
-    }
-  };
+    console.log("Network or server error:", err.message); 
+    setError("Failed to load data");
+    // Error → also turn off loading
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     loadData();
   }, []);
+
+  
 
   const purchaseAthlete = async (athleteId: number): Promise<void> => {
     const athlete = athletes.find(a => a.id === athleteId);
@@ -75,26 +86,36 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
         );
       }
 
-      setFinance(prev => ({
-        ...prev!,
-        moneyLeft: prev!.moneyLeft - athlete.price,
-        moneySpent: prev!.moneySpent + athlete.price,
-        numberOfPurchases: prev!.numberOfPurchases +1,
-      }));
-    } catch (err) {
-      alert("Purchase failed");
-    }
-  };
+      const purchaseResponse = await axios.post(`http://localhost:5115/api/Finance/purchase/${athlete.price}`, {
+        Price: athlete.price
+      });
+
+      if (purchaseResponse.data) {
+        setFinance(purchaseResponse.data);
+        alert("Player bought")
+      } 
+  } catch (err) {
+        alert("purchase failed");
+      }
+    };
   
   
-  const takeLoan = async (amount: number = 500000): Promise<void> => {
+  const takeLoan = async (amount: number = 1000000): Promise<void> => {
     if (!finance) return;
-    setFinance({
-      ...finance,
-      moneyLeft: finance.moneyLeft + amount
-    });
-    alert(`Loan approved! +${amount.toLocaleString()} NOK`);
-  };
+    
+    try {
+      const loanResponse = await axios.post(
+        `http://localhost:5115/api/Finance/loan/${amount}`
+      );
+
+      if (loanResponse.data) {
+        setFinance(loanResponse.data);
+        alert(`Funds boosted to your account! + £ ${amount.toLocaleString()} added`)
+      }
+    } catch (err) {
+      alert("Could not loan you more funds");
+    }
+  }
 
   const saveAthlete = async (newAthlete: Omit<IAthlete, "id">): Promise<IDefaultResponse> => { // Omit er gi å få alle felt fra IAthlete utenom id, pga backend genererer det
     try {
@@ -171,6 +192,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     saveVenue,
     getAthleteQuantity,
     updateAthlete,
+    loadData
   };
 
   return (
@@ -186,4 +208,4 @@ export const useSportsWorld = (): ISportsWorldContext => {
     throw new Error("useSportsWorld must be used within SportsWorldProvider");
   }
   return context;
-};
+}

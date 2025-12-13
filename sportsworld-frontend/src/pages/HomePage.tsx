@@ -1,11 +1,12 @@
 import AthleteCard from "../components/athletes/AthleteCard"
 import { useSportsWorld } from "../context/SportsWorldContext"
 import EditAthlete from "../components/athletes/EditAthlete";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const HomePage = () => {
     const {athletes, deleteAthlete, updateAthlete} = useSportsWorld();
+    const { loadData } = useSportsWorld();
     const [editingId, setEditingId] = useState<number | null>(null)
     const editingAthlete = athletes.find(a => a.id === editingId);
     const startEditing = (id: number) => {
@@ -20,6 +21,10 @@ const HomePage = () => {
       updateAthlete(updatedAthlete);
       setEditingId(null);
     }
+
+    useEffect(() => {
+      loadData();
+    }, []);
 
     if (!athletes || athletes.length === 0) {
         return (

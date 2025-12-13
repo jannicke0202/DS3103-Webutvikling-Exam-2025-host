@@ -31,4 +31,5 @@ export interface ISportsWorldContext {
 
   // helper
   getAthleteQuantity: () => number;
+  loadData: () => Promise<void>;
 }

@@ -1,6 +1,15 @@
+import VenueList from "../components/venues/VenueList";
 import { useSportsWorld } from "../context/SportsWorldContext";
 import type { IVenue } from "../interfaces/IVenue";
 
+
+
+const SeeVenues = () => {
+    return <VenueList/>
+}
+
+
+/*
 function SeeAllVenues() {
     const { venues, loading, error } = useSportsWorld();
 
@@ -51,6 +60,6 @@ function SeeAllVenues() {
             )}
         </main>
     );
-}
+}*/
 
-export default SeeAllVenues;
+export default SeeVenues;
