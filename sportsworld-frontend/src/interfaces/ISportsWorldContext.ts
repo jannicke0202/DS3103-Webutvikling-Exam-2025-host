@@ -13,12 +13,11 @@ export interface ISportsWorldContext {
   error: string | null;
 
   // athlete functions
-  // newAthlete uten id, siden backend genererer id
+
   saveAthlete: (newAthlete: Omit<IAthlete, "id">) => Promise<IDefaultResponse>;
   purchaseAthlete: (id: number) => Promise<void>;
   deleteAthlete: (id: number) => Promise<void>;
-
-  // updateAthlete: (updated: IAthlete) => Promise<void>;
+  updateAthlete: (updatedAthlete: IAthlete) => Promise<IDefaultResponse>
 
   // finance
   takeLoan: (amount: number) => Promise<void>;

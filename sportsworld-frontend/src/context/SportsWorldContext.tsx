@@ -140,6 +140,22 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
   
   // EDIT ATHLETE FUNKSJON ETTERHVERT
 
+  const updateAthlete = async (updatedAthlete: IAthlete): Promise<IDefaultResponse> => {
+  try {
+    const response = await AthleteService.putAthlete(updatedAthlete);
+    
+    if (response.success && response.data) {
+      setAthletes(prev => 
+        prev.map(a => a.id === updatedAthlete.id ? response.data! : a)
+      );
+    }
+
+    return response;
+  } catch (err) {
+    return { success: false, message: "Failed to update athlete" };
+  }
+};
+
   const getAthleteQuantity = () => athletes.length;
 
   const value: ISportsWorldContext = {
@@ -154,6 +170,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     takeLoan,
     saveVenue,
     getAthleteQuantity,
+    updateAthlete,
   };
 
   return (

@@ -41,7 +41,7 @@ export default function RegisterAthlete() {
       setName("");
       setPrice("");
       setGender("");
-      setSelectedImage(null);
+      setSelectedImage("");
       alert("Athlete successfully registered!");
     } else {
       alert("Failed to register athlete");
