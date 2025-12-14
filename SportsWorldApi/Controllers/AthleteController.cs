@@ -181,26 +181,3 @@ public class AthleteController(SportsWorldContext _sportsWorldContext) : Control
         }
     }
 }
-
-/*[ApiController]
-[Route("[controller]")]
-public class AthleteController(SportsWorldContext _sportsWorldContext) : ControllerBase
-{
-    [HttpGet]
-    public async Task<ActionResult<List<Athlete>>> Get()
-    {
-        try
-        {
-            List<Athlete> athletes = await _sportsWorldContext.Athletes.ToListAsync();
-            return athletes;
-        }
-        catch (DbException)
-        {
-            return StatusCode(500, "Database Exception");
-        }
-        catch
-        {
-            return StatusCode(500, "Server side Exception");
-        }
-    }
-}*/

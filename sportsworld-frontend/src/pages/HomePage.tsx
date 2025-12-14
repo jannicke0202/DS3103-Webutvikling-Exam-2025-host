@@ -8,10 +8,22 @@ const HomePage = () => {
     const {athletes, deleteAthlete, updateAthlete} = useSportsWorld();
     const { loadData } = useSportsWorld();
     const [editingId, setEditingId] = useState<number | null>(null)
-    const editingAthlete = athletes.find(a => a.id === editingId);
     const startEditing = (id: number) => {
       setEditingId(id);
     };
+    const [sortOrder, setSortOrder] = useState<"low" | "high" | null>(null);
+
+    const toggleSort = () => {
+      if (sortOrder === null) setSortOrder("low");
+      else if (sortOrder === "low") setSortOrder("high");
+      else setSortOrder(null);
+    };
+
+    const sortedAthletes = [...athletes].sort((a, b) => {
+      if (sortOrder === "low") return a.price - b.price;
+      if (sortOrder === "high") return b.price - a.price;
+      return 0;
+    })
 
     const cancelEditing = () => {
       setEditingId(null);
@@ -47,8 +59,20 @@ const HomePage = () => {
         All Players ({athletes.length})
       </h2>
 
+      {/* Sorter knapp */}
+      <button
+        onClick={toggleSort}
+        className="font-semibold text-gray rounded-lg bg-blue-500 px-6 py-3 mb-4">
+          Sort by price 
+          {sortOrder === "low" && " | Lowest price first"}
+          {sortOrder === "high" && " | Highest price first"}
+          {sortOrder === null && ""}
+
+
+      </button>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {athletes.map((athlete) => (
+        {sortedAthletes.map((athlete) => (
           <div key={athlete.id}>
             {editingId === athlete.id ? (
               <div className="bg-white rounded-lg p-6 border shadow-lg">

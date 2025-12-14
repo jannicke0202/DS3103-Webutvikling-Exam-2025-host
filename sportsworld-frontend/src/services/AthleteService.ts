@@ -12,7 +12,7 @@ const endpoint = "http://localhost:5115/api";
 const getAllAthletes = async (): Promise<IAthletesResponse> => {
   try {
 
-    const url = `${endpoint}/Athlete`; // Usikker på URL
+    const url = `${endpoint}/Athlete`; 
 
     const response = await axios.get(url);
 

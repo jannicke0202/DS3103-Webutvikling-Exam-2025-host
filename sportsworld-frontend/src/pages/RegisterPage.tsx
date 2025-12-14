@@ -1,5 +1,4 @@
 import RegisterAthlete from "../components/athletes/RegisterAthlete";
-import ImageUpload from "../components/shared/ImageUpload";
 
 export default function RegisterPage() {
   return (

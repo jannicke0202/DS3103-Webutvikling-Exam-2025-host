@@ -55,7 +55,6 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     } catch (err: any) {
     console.log("Network or server error:", err.message); 
     setError("Failed to load data");
-    // Error → also turn off loading
     setLoading(false);
   }
 };
@@ -77,8 +76,6 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
     }
   
     try {
-      // endring av status, penger og antall kjøp
-
       const togglePurchaseStatus = await AthleteService.togglePurchaseStatus(athleteId);
       if (togglePurchaseStatus.success && togglePurchaseStatus.data) {
         setAthletes( prev => 
@@ -145,8 +142,6 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
   }
 };
 
-
-  // Add this function in your context
   const deleteAthlete = async (id: number): Promise<void> => {
     if (!confirm("Are you sure you want to delete this player?")) return;
   
@@ -158,8 +153,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
       alert("Delete failed");
     }
   };
-  
-  // EDIT ATHLETE FUNKSJON ETTERHVERT
+
 
   const updateAthlete = async (updatedAthlete: IAthlete): Promise<IDefaultResponse> => {
   try {

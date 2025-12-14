@@ -1,5 +1,3 @@
-// src/components/athletes/RegisterAthlete.tsx
-
 import { useState } from "react";
 import { useSportsWorld } from "../../context/SportsWorldContext";
 import ImageUpload from "../shared/ImageUpload";

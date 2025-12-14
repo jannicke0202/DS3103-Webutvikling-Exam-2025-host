@@ -23,7 +23,7 @@ function AddVenue() {
 
   const response = await saveVenue({
     name: name.trim(),
-    capacity: capacity.trim(),    // string matcher IVenue + C#
+    capacity: capacity.trim(),
     image: image.trim(),
   });
 

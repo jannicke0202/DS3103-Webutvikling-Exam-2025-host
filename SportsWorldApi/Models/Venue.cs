@@ -12,12 +12,3 @@ namespace SportsWorldApi.Models;
     public string Image { get; set; } = string.Empty;
     }
     
-/*Table 3. Venue:
--
-Id
--
-Name
--
-Capacity***
--
-Image */

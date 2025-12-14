@@ -17,7 +17,6 @@ const AthleteCard = ({ athlete, onEdit, onDelete }: {
     <div className="athlete-item" style={{ border: "1px solid #ddd", 
     padding: "12px", borderRadius: "32px", marginBottom: "16px", width: "75%" }}>
       
-      {/* Player photo */}
       {imageUrl ? (
         <img 
           src={imageUrl} 
