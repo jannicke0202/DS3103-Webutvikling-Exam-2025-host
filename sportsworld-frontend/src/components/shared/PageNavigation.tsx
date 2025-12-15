@@ -9,23 +9,23 @@ const PageNavigation = () => {
         </Link>
 
         <Link to="/register" className="text-white text-xl font-medium hover:text-cyan-400">
-        Register a new player
+          Register a new player
         </Link>
 
         <Link to="/administration-page" className="text-white text-xl font-medium hover:text-cyan-400">
           Finance dashboard
         </Link>
 
-        <Link to="/page4" className="text-white text-xl font-medium hover:text-cyan-400">
+        <Link to="/see-venues" className="text-white text-xl font-medium hover:text-cyan-400">
           See all venues
         </Link>
 
-        <Link to="/page5" className="text-white text-xl font-medium hover:text-cyan-400">
+        <Link to="/add-venue" className="text-white text-xl font-medium hover:text-cyan-400">
           Add a venue
         </Link>
 
         <Link to="/*" className="text-white text-xl font-medium hover:text-cyan-400">
-          
+
         </Link>
 
       </div>
