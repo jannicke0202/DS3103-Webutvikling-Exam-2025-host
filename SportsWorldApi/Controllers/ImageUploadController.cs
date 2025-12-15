@@ -17,14 +17,14 @@ public class ImageUploadController(IWebHostEnvironment _webHostEnvironment) : Co
         {
 
             string webRootPath = _webHostEnvironment.WebRootPath;
-            string absolutePath = Path.Combine(webRootPath, "images/athletes", file.FileName);
+            string absolutePath = Path.Combine(webRootPath, "images", file.FileName);
 
             using (var fileStream = new FileStream(absolutePath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
             }
 
-            string url = $"/images/athletes/{file.FileName}";
+            string url = $"/images/{file.FileName}";
 
             return Created(url, new { url });
 

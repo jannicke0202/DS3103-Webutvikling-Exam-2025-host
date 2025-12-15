@@ -56,35 +56,39 @@ function AddVenue() {
                     {success}
                 </div>
             )}
+            <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-2xl mx-auto border border-gray-200">
+                <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+                    Register New Venue
+                </h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label className="block text-sm mb-1">Name</label>
-                    <input
-                        className="w-full border rounded px-3 py-2"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Old Trafford" />
-                </div>
+                        <input
+                            className="w-full px-5 py-4 border rounded-xl text-lg"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Venue name" />
+                    </div>
 
-                <div>
-                    <label className="block text-sm mb-1">Capacity</label>
-                    <input
-                        className="w-full border rounded px-3 py-2"
-                        value={capacity}
-                        onChange={(e) => setCapacity(e.target.value)}
-                        placeholder="75000" />
-                </div>
+                    <div>
 
-                <button
-                    type="submit"
-                    className="w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-xl rounded-xl hover:from-green-700 hover:to-emerald-700 transition"
-                > Save venue
-                </button>
-                <div className="my-8">
-                    <ImageUpload onImageSelected={setImage} />
-                </div>
-            </form>
+                        <input
+                            className="w-full px-5 py-4 border rounded-xl text-lg"
+                            value={capacity}
+                            onChange={(e) => setCapacity(e.target.value)}
+                            placeholder="Capacity" />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-xl rounded-xl hover:from-green-700 hover:to-emerald-700 transition"
+                    > Save venue
+                    </button>
+                    <div className="my-8">
+                        <ImageUpload onImageSelected={setImage} />
+                    </div>
+                </form>
+            </div>
         </main>
     );
 }
