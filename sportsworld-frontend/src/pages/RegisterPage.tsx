@@ -8,7 +8,7 @@ export default function RegisterPage() {
           Register New Athlete
         </h1>
         <p className="text-center text-xl text-gray-600 mb-12">
-          Legg til ny spiller
+          Add a new athlete
         </p>
         <RegisterAthlete />
       </div>
