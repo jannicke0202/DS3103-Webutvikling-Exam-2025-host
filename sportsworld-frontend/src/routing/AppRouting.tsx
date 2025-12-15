@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AdminPage, HomePage } from "../pages";
 import PageFooter from "../components/shared/PageFooter";
 import PageNavigation from "../components/shared/PageNavigation";
@@ -11,18 +11,18 @@ const AppRouting = () => {
     return (
         <BrowserRouter>
 
-        <PageNavigation></PageNavigation>
-        
-        <Routes>
-            <Route path="/" element={<HomePage/>}/>
-            <Route path="/register" element = {<RegisterPage/>}/>
-            <Route path="/administration-page" element={<AdminPage/>}/>
-            <Route path="/page4" element={<Page4/>}/>
-            <Route path="/page5" element={<Page5/>}/>
-            <Route path="/*" element={<NotFoundPage/>}/>
-        </Routes>
+            <PageNavigation></PageNavigation>
 
-        <PageFooter/>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/administration-page" element={<AdminPage />} />
+                <Route path="/see-venues" element={<Page4 />} />
+                <Route path="/add-venue" element={<Page5 />} />
+                <Route path="/*" element={<NotFoundPage />} />
+            </Routes>
+
+            <PageFooter />
 
         </BrowserRouter>
     )
