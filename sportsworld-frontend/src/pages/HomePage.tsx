@@ -66,7 +66,7 @@ const HomePage = () => {
         {/* Sorter knapp */}
         <button
           onClick={toggleSort}
-          className="font-semibold text-gray rounded-lg bg-blue-500 px-6 py-3 mb-4">
+          className="font-semibold text-gray rounded-lg bg-blue-500 px-6 py-3 mb-4 cursor-pointer">
           Sort by price
           {sortOrder === "low" && " | Lowest price first"}
           {sortOrder === "high" && " | Highest price first"}
