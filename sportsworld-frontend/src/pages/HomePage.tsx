@@ -63,12 +63,7 @@ const HomePage = () => {
         All Players ({athletes.length})
       </h2>
 
-      <input
-        type="text"
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        placeholder="Search for athletes"
-        />
+      
 
         
 
@@ -81,6 +76,13 @@ const HomePage = () => {
           {sortOrder === "high" && " | Highest price first"}
           {sortOrder === null && ""}
       </button>
+
+      <input className="rounded-lg font-semibold bg-orange-200 ml-50 px-6 py-3 text-center"
+        type="text"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Search for athletes"
+        />
         
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayedAthletes.map((athlete) => (

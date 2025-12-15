@@ -89,7 +89,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
 
       if (purchaseResponse.data) {
         setFinance(purchaseResponse.data);
-        alert("Player bought")
+        alert(`${athlete.name} has been purchased for £${athlete.price.toLocaleString()}!`)
       } 
   } catch (err) {
         alert("purchase failed");
@@ -114,7 +114,7 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
         alert(`Funds boosted to your account! + £ ${amount.toLocaleString()} added`)
       }
     } catch (err) {
-      alert("Could not loan you more funds");
+      alert("Invalid amount");
     }
   }
 

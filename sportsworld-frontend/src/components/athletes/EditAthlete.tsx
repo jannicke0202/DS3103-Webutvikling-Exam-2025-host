@@ -61,8 +61,8 @@ const EditAthlete = ({athlete, onSave, onCancel}: {
           onChange={(e) => setPurchaseStatus(e.target.value === "bought")}
           className="w-full px-3 py-2 border rounded"
         >
-          <option value="available">Available</option>
-          <option value="bought">Bought</option>
+          <option value="available">Not purchased</option>
+          <option value="bought">Purchased</option>
         </select>
       </div>
     </div>
