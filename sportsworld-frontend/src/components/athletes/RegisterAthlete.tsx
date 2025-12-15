@@ -90,7 +90,7 @@ export default function RegisterAthlete() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-xl rounded-xl hover:from-green-700 hover:to-emerald-700 transition"
+          className="w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-xl rounded-xl hover:from-green-700 hover:to-emerald-700 transition cursor-pointer"
         >
           {isLoading ? "Saving..." : "Add to Transfer List"}
         </button>
