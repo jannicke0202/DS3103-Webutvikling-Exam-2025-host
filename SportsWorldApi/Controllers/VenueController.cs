@@ -35,6 +35,7 @@ public class VenueController : ControllerBase
         }
     }
 
+    // Post venue
     [HttpPost]
     public async Task<ActionResult<Venue>> Post([FromBody] Venue venue)
     {
@@ -55,4 +56,34 @@ public class VenueController : ControllerBase
             return StatusCode(500, "Server side Exception");
         }
     }
+
+    // Delete venue
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+        
+            var venue = await _sportsWorldContext.Venues.FindAsync(id);
+
+            if (venue == null)
+            {
+                return NotFound(); 
+            }
+            _sportsWorldContext.Venues.Remove(venue);
+            await _sportsWorldContext.SaveChangesAsync();
+
+            return NoContent();
+    }
+    catch (DbException)
+    {
+        return StatusCode(500, "Database Exception");
+    }
+    catch
+    {
+        return StatusCode(500, "Server side Exception");
+    }
+  }
 }
+
+

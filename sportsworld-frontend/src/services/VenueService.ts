@@ -8,12 +8,10 @@ import type {
 
 const endpoint = "http://localhost:5115/api";
 
-
 // GET all
 const getAllVenues = async (): Promise<IVenuesResponse> => {
   try {
-
-    const url = `${endpoint}/Venue`; // Usikker på URL
+    const url = `${endpoint}/Venue`;
 
     const response = await axios.get(url);
 
@@ -21,7 +19,6 @@ const getAllVenues = async (): Promise<IVenuesResponse> => {
       success: true,
       data: response.data,
     };
-  
   } catch (error: any) {
     console.error("Axios error:", error.message);
     if (error.response) {
@@ -37,7 +34,7 @@ const getAllVenues = async (): Promise<IVenuesResponse> => {
 
 const postVenue = async (venue: IVenue): Promise<IVenueResponse> => {
   try {
-    const response = await axios.post(`${endpoint}/venue`, venue);
+    const response = await axios.post(`${endpoint}/Venue`, venue); // ✅ endret
     return {
       success: true,
       data: response.data,
@@ -55,7 +52,7 @@ const postVenue = async (venue: IVenue): Promise<IVenueResponse> => {
 // DELETE
 const deleteVenue = async (id: number): Promise<IDefaultResponse> => {
   try {
-    await axios.delete(`${endpoint}/venue/${id}`);
+    await axios.delete(`${endpoint}/Venue/${id}`); // ✅ endret
     return {
       success: true,
       message: "",
