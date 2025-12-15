@@ -100,6 +100,10 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
   const takeLoan = async (amount: number = 1000000): Promise<void> => {
     if (!finance) return;
     
+    if (amount <= 0) {
+      alert("Please write more than £ 0")
+    }
+
     try {
       const loanResponse = await axios.post(
         `http://localhost:5115/api/Finance/loan/${amount}`
@@ -153,6 +157,10 @@ export const SportsWorldProvider = ({ children }: SportsWorldProviderProps) => {
       alert("Delete failed");
     }
   };
+
+  
+
+
 
 
   const updateAthlete = async (updatedAthlete: IAthlete): Promise<IDefaultResponse> => {

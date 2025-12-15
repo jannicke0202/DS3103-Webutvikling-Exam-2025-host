@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const HomePage = () => {
     const {athletes, deleteAthlete, updateAthlete} = useSportsWorld();
     const { loadData } = useSportsWorld();
+    const [searchInput, setSearchInput] = useState("");
     const [editingId, setEditingId] = useState<number | null>(null)
     const startEditing = (id: number) => {
       setEditingId(id);
@@ -19,12 +20,6 @@ const HomePage = () => {
       else setSortOrder(null);
     };
 
-    const sortedAthletes = [...athletes].sort((a, b) => {
-      if (sortOrder === "low") return a.price - b.price;
-      if (sortOrder === "high") return b.price - a.price;
-      return 0;
-    })
-
     const cancelEditing = () => {
       setEditingId(null);
     };
@@ -33,6 +28,15 @@ const HomePage = () => {
       updateAthlete(updatedAthlete);
       setEditingId(null);
     }
+
+    const displayedAthletes = [...athletes].sort((a, b) => {
+    if (sortOrder === "low") return a.price - b.price;
+    if (sortOrder === "high") return b.price - a.price;
+      return 0;
+    })
+      .filter((athlete) =>
+      athlete.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
 
     useEffect(() => {
       loadData();
@@ -59,6 +63,15 @@ const HomePage = () => {
         All Players ({athletes.length})
       </h2>
 
+      <input
+        type="text"
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Search for athletes"
+        />
+
+        
+
       {/* Sorter knapp */}
       <button
         onClick={toggleSort}
@@ -67,12 +80,10 @@ const HomePage = () => {
           {sortOrder === "low" && " | Lowest price first"}
           {sortOrder === "high" && " | Highest price first"}
           {sortOrder === null && ""}
-
-
       </button>
-
+        
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {sortedAthletes.map((athlete) => (
+        {displayedAthletes.map((athlete) => (
           <div key={athlete.id}>
             {editingId === athlete.id ? (
               <div className="bg-white rounded-lg p-6 border shadow-lg">
@@ -82,10 +93,8 @@ const HomePage = () => {
                   onSave={saveEditedAthlete}
                   onCancel={cancelEditing}
                 />
-
-              </div>
-
-            ) : (
+                </div>
+              ) : (
               <AthleteCard
                 athlete={athlete}
                 onEdit={() => startEditing(athlete.id!)}

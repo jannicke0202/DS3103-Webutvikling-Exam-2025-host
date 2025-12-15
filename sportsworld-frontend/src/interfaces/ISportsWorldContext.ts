@@ -19,6 +19,7 @@ export interface ISportsWorldContext {
   deleteAthlete: (id: number) => Promise<void>;
   updateAthlete: (updatedAthlete: IAthlete) => Promise<IDefaultResponse>
 
+
   // finance
   takeLoan: (amount: number) => Promise<void>;
 

@@ -1,6 +1,7 @@
 // src/pages/AddVenue.tsx
 import { useState, type FormEvent } from "react";
 import { useSportsWorld } from "../context/SportsWorldContext";
+import ImageUpload from "../components/shared/ImageUpload";
 
 function AddVenue() {
     const { saveVenue } = useSportsWorld();
@@ -17,7 +18,7 @@ function AddVenue() {
   setSuccess(null);
 
   if (!name.trim() || !capacity.trim()) {
-    setError("Name and capacity are required");
+    setError("Name, capacity and image are required");
     return;
   }
 
@@ -73,24 +74,18 @@ function AddVenue() {
                         placeholder="75000" />
                 </div>
 
-                <div>
-                    <label className="block text-sm mb-1">Image path (optional)</label>
-                    <input
-                        className="w-full border rounded px-3 py-2"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        placeholder="image/oldtrafford.jpg" />
-                </div>
-
                 <button
                     type="submit"
-                    className="mt-4 w-full py-3 bg-blue-600 text-white font-semibold rounded"
-                >
-                    Save venue
+                    className="w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-xl rounded-xl hover:from-green-700 hover:to-emerald-700 transition"
+                    > Save venue
                 </button>
+                    <div className="my-8">
+                        <ImageUpload onImageSelected={setImage} />
+                    </div>
             </form>
         </main>
     );
 }
 
 export default AddVenue;
+

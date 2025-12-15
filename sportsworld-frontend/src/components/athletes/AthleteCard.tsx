@@ -47,7 +47,7 @@ const AthleteCard = ({ athlete, onEdit, onDelete }: {
         {athlete.name}
       </h3>
       <p><strong>Price:</strong> £ {athlete.price.toLocaleString()}</p>
-      <p><strong>Status:</strong> {athlete.purchaseStatus ? "Bought" : "Available"}</p>
+      <p><strong>Status:</strong> {athlete.purchaseStatus ? "Purchased" : "Not purchased"}</p>
       <p><strong>Gender:</strong> {athlete.gender}</p>
 
       {/* Buttons */}
